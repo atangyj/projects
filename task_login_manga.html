@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Registration Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      box-sizing: border-box;
+      /* outline: 1px dashed #fff; */
+    }
+
+    /* LAYOUT */
+
+    .bg.outer {
+      width: 50%;
+      margin: 0 auto;
+      padding: 30px 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .bg.inner {
+      border-radius: 3px;
+      padding: 20px;
+    }
+
+    .tab.signup,
+    .tab.login {
+      float: left;
+      width: 50%;
+      height: 60px;
+      line-height: 40px;
+      text-align: center;
+      padding: 10px 0px;
+    }
+
+    .form-label {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      margin: 32px 0px;
+      color: #fff;
+      font-family: sans-serif;
+      font-size: 1.2rem;
+    }
+
+    input,
+    button {
+      height: 40px;
+      margin-bottom: 40px;
+      padding: 15px;
+    }
+
+    button {
+      margin-bottom: 0px;
+      height: 60px;
+      background: rgba(256, 256, 256, 0);
+      border: 1px solid #fff;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    input[name="email"],
+    input[name="pwd"],
+    button {
+      display: block;
+      width: 100%;
+    }
+
+    input[name="firstname"],
+    input[name="lastname"] {
+      width: 48%;
+    }
+
+    input[name="lastname"] {
+      float: right;
+    }
+
+    .forgot-pw {
+      float: right;
+      margin-bottom: 20px;
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    form[name="login"] input[type="password"] {
+      margin-bottom: 20px;
+    }
+
+
+    /* COLOUR */
+
+    body {
+      width: 100vh;
+      height: 100vh;
+      background: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
+    }
+
+    .bg.outer {
+      /* border: 1px solid #fff; */
+      background: rgba(256, 256, 256, .2);
+    }
+
+    .bg.inner {
+      /* background: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%); */
+    }
+
+    .panel.login {
+      display: none;
+    }
+
+    .tab.signup,
+    .tab.login {
+      font-family: sans-serif;
+      color: #fff;
+    }
+
+    .tab.signup {
+      background: #26b08c;
+    }
+
+    .tab.login {
+      background: #64849c;
+    }
+
+
+
+    /* INTERACTION */
+
+    .tab.signup,
+    .tab.login,
+    input[type="submit"] {
+      cursor: pointer;
+    }
+
+    .empty {
+      border: 1px solid red;
+    }
+
+    /* FONT */
+
+    input {
+      font-size: .8rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg outer">
+    <!-- <div class="bg inner"> -->
+    <div class="tab-container">
+      <div class="tab signup">Sign Up</div>
+      <div class="tab login">Log In</div>
+    </div>
+    <div class="panel signup">
+      <p class="form-label">Sign Up for Free</p>
+      <form name="signup">
+        <input type="text" name="firstname" placeholder="First Name" required>
+        <input type="text" name="lastname" placeholder="Last Name" required>
+        <input type="text" name="email" placeholder="Email Address" required>
+        <input type="password" name="pwd" placeholder="Set A Password" required>
+        <button type="submit" class="submit">GET STARTTED</button>
+      </form>
+
+    </div>
+    <div class="panel login">
+      <p class="form-label">Welcome Back!</p>
+      <form name="login">
+        <input type="text" name="email" placeholder="Email Address" required>
+        <input type="password" name="pwd" placeholder="Password" required>
+        <p class="forgot-pw">Forgot password?</p>
+        <button type="submit" class="submit">LOGIN</button>
+      </form>
+    </div>
+    <!-- </div> -->
+  </div>
+
+  <script>
+    window.onload = function init() {
+      let tabs = document.getElementsByClassName('tab');
+      let buttons = document.getElementsByClassName('submit');
+
+      for (let i = 0; i < tabs.length; i++) {
+        tabs[i].onclick = switchPanel;
+      }
+
+      // for (let i = 0; i < buttons.length; i++) {
+      //   buttons[i].onclick = submit;
+      // }
+
+    }
+
+
+    function switchPanel(e) {
+      let tabs = document.getElementsByClassName('tab');
+      for (let i = 0; i < tabs.length; i++) {
+        tabs[i].style.backgroundColor = "#64849c";
+      }
+
+      let panels = document.getElementsByClassName('panel');
+      for (let i = 0; i < panels.length; i++) {
+        panels[i].style.display = "none";
+      }
+
+      e.target.style.backgroundColor = "#26b08c";
+      let panel_name = e.target.classList[1];
+      console.log(panel_name);
+      document.querySelector(".panel." + panel_name).style.display = "block";
+    }
+
+    function submit(e) {
+      let input;
+      if (e.target.innerText == "LOGIN") {
+        inputs = document.querySelectorAll("form[name='login'] input");
+      } else {
+        inputs = document.querySelectorAll("form[name='signup'] input");
+      }
+
+      for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].value == "") {
+          inputs[i].classList.add('empty');
+        }
+      }
+
+    }
+  </script>
+</body>
+
+</html>
